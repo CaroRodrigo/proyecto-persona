@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+<div th:if="${personas != null and !personas.empty }"></div> asi es un if
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="/fragments/head :: head">
+    </head>
+
+    <body>
+        <nav th:replace="/fragments/nav-bar :: nav"></nav>
+        <div class="container">
+            <div th:if="${error}" class="alert alert-dark" mt-3 role="alert">
+                <span th:text="${error}"> </span>
+            </div>
+            <div th:if="${succes}" class="alert alert-sucess" role="alert">
+                <span th:text="${success}"> </span>
+            </div>
+            <div class="card">
+                <div class="card-header d-flex mt-5">
+                    <h1>Crear Persona</h1>
+                    <button class="btn-dark px-5 py-2 ms-auto"><a th:href="@{/persona/list}">Lista de personas</a></button>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/persona/save}" method="POST" th:object="${persona}" class="col-6 mx-auto">
+                        <input hidden th:field="*{id}">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" th:field="*{nombre}" placeholder="Juan Carlos">
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" th:field="*{apellido}" placeholder="Jimenez Rufino">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edad" class="form-label">Edad</label>
+                            <input type="number" class="form-control" th:field="*{edad}" placeholder="70">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciudad" class="form-label">Ciudad</label>
+                            <select class="form-select" th:field="*{ciudad.id}" >
+                                <option th:each="c : ${ciudades}" th:text="${c.nombre}" th:value="${c.id}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dni" class="form-label">DNI</label>
+                            <input type="text" class="form-control" th:field="*{dni}" placeholder="1135671">
+                        </div>
+                        <button class="btn-dark px-5 py-2 ms-auto">Guardar</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

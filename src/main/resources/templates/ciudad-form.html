@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+<div th:if="${personas != null and !personas.empty }"></div> asi es un if
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="/fragments/head :: head"></head>
+    <body>
+        <nav th:replace="/fragments/nav-bar :: nav"></nav>
+        <div class="container">
+            <div class="card">
+                <div class="card-header d-flex mt-5">
+                    <h1>Crear Ciudad</h1>
+                    <button class="btn-dark px-5 py-2 ms-auto"><a th:href="@{/ciudad/list}">Lista de personas</a></button>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/ciudad/save}" method="POST" th:object="${ciudad}" class="col-6 mx-auto">
+                        <input hidden th:field="*{id}">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" th:field="*{nombre}" placeholder="Cordoba">
+                        </div>
+                        <button class="btn-dark px-5 py-2 ms-auto">Guardar</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
